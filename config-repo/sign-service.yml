@@ -1,8 +1,6 @@
 server:
   port: 8083
 
-name: sign
-
 eureka:
   instance:
     metadata-map:
@@ -13,3 +11,10 @@ security:
   user:
     name: user
     password: password
+  oauth2:
+    client:
+      clientId: sign-service
+      clientSecret: ${security.user.password}
+      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
+      grant-type: client_credentials
+      scope: server
